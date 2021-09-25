@@ -13,13 +13,10 @@ module.exports = {
                 }
             }
 
-            let ordered = photos.sort((a, b) => {
+            return photos.sort((a, b) => {
                 if(sort.dir === "DESC") return a[sort.by] > b[sort.by] ? -1 : 1
                 else return a[sort.by] > b[sort.by] ? 1 : -1
             });
-
-
-            return ordered;
         },
         saluda: (_, {nombre}, ctx) => {
             return `Hola ${nombre}`;
