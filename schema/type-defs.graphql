@@ -45,12 +45,17 @@ input PostPhotoInput {
     description: String
 }
 
+input Pagination {
+    rows: Int=20
+    page: Int=1    
+}
+
 type Query {
     totalPhotos: Int!
     allPhotos(
         sort: Sorting
+        pagination: Pagination
     ): [Photo!]!
-    saluda(nombre: String!): String!
 }
 
 type Mutation {
