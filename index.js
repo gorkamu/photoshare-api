@@ -2,6 +2,7 @@
 
 const { readFileSync } = require('fs');
 const { ApolloServer } = require('apollo-server-express');
+const { GrahpQLUpload, graphqlUploadExpress } = require('graphql-upload');
 const express = require('express');
 const depthLimit = require('graphql-depth-limit');
 const { createComplexityLimitRule } = require('graphql-validation-complexity');
@@ -12,7 +13,7 @@ const { Mutation } = require('./resolvers/mutation');
 const { Photo } = require('./resolvers/photo');
 const { User } = require('./resolvers/user');
 
-const resolvers = {
+const resolvers = {		
 	Query,
 	Mutation,
 	Photo,
@@ -41,6 +42,6 @@ async function startServer() {
 
 startServer();
 
-
+app.use(graphqlUploadExpress());
 app.get('/', (req, res) => res.end('Welcome to the PhotoShare API'))
 app.listen({ port: 4000 }, () => console.log(`GraphQL Server running @http://localhost:4000${apolloServer.graphqlPath}`))

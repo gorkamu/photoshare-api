@@ -1,3 +1,5 @@
+scalar Upload
+
 enum SortingDirection {
     ASC
     DESC
@@ -43,6 +45,7 @@ input PostPhotoInput {
     name: String!
     category: PhotoCategory=PORTRAIT
     description: String
+    file: Upload
 }
 
 input Pagination {
@@ -58,6 +61,13 @@ type Query {
     ): [Photo!]!
 }
 
+type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+}
+
 type Mutation {
     postPhoto(input: PostPhotoInput!): Photo!
+    singleUpload(file: Upload!): File!
 }
