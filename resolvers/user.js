@@ -1,6 +1,6 @@
 'use strict'
 
-const { users, photos, tags} = require('../data/data');
+const { photos, tags} = require('../data/data');
 
 let _id = 0;
 

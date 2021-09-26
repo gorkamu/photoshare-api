@@ -3,6 +3,8 @@
 const { readFileSync } = require('fs');
 const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
+const depthLimit = require('graphql-depth-limit');
+const { createComplexityLimitRule } = require('graphql-validation-complexity');
 
 const typeDefs = readFileSync('./schema/type-defs.graphql').toString('utf-8');
 const { Query } = require('./resolvers/query');
@@ -22,7 +24,16 @@ let app = express();
 let apolloServer = null;
 
 async function startServer() {
-	apolloServer = new ApolloServer({ typeDefs, resolvers });		
+	apolloServer = new ApolloServer({ 
+		typeDefs, 
+		resolvers,
+		validationRules: [
+			depthLimit(5),
+			createComplexityLimitRule(1000, {
+				onCost: cost => console.log(`query cost: ${cost}`)
+			})
+		]
+	});		
 	await apolloServer.start();
 	apolloServer.applyMiddleware({ app });
 }

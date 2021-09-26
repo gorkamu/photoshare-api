@@ -1,6 +1,6 @@
 'use strict'
 
-const { users, photos, tags} = require('../data/data');
+const { users, tags} = require('../data/data');
 
 module.exports = {
     Photo: {

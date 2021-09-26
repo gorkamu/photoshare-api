@@ -1,6 +1,6 @@
 'use strict'
 
-const { users, photos, tags} = require('../data/data');
+const { photos } = require('../data/data');
 const sorting = require('../util/sorting');
 const paginate = require('../util/paginate');
 
